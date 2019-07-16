@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AppAnalytics</fullName>
+    <types>
+        <members>appAnalyticsRequestController</members>
+        <members>appAnalyticsRequestControllerTest</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>App_Analytics</members>
+        <name>CustomApplication</name>
+    </types>
+    <types>
+        <members>App_Analytics_Query_Requests</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>App_Analytics_Query_Requests</members>
+        <members>App_Analytics_UtilityBar</members>
+        <name>FlexiPage</name>
+    </types>
+    <types>
+        <members>appAnalyticsRequestCard</members>
+        <members>appAnalyticsRequestList</members>
+        <members>appAnalyticsRequestPageWrapper</members>
+        <members>newAnalyticsRequestForm</members>
+        <members>pubsub</members>
+        <name>LightningComponentBundle</name>
+    </types>
+    <types>
+        <members>AppAnalytics</members>
+        <name>PermissionSet</name>
+    </types>
+    <version>46.0</version>
+</Package>
