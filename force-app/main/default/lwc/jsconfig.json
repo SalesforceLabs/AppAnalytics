@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "paths": {
+            "c/appAnalyticsRequestCard": [
+                "appAnalyticsRequestCard/appAnalyticsRequestCard.js"
+            ],
+            "c/appAnalyticsRequestList": [
+                "appAnalyticsRequestList/appAnalyticsRequestList.js"
+            ],
+            "c/appAnalyticsRequestPageWrapper": [
+                "appAnalyticsRequestPageWrapper/appAnalyticsRequestPageWrapper.js"
+            ],
+            "c/newAnalyticsRequestForm": [
+                "newAnalyticsRequestForm/newAnalyticsRequestForm.js"
+            ],
+            "c/pubsub": [
+                "pubsub/pubsub.js"
+            ]
+        }
+    },
+    "include": [
+        "**/*",
+        "../../../../.sfdx/typings/lwc/**/*.d.ts"
+    ],
+    "typeAcquisition": {
+        "include": [
+            "jest"
+        ]
+    }
+}

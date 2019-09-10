@@ -88,12 +88,11 @@ export default class NewAnalyticsRequestForm extends LightningElement {
     let passOrgIDSearchCheck =  (this.orgSearchString.length === 15 || this.orgSearchString.length === 18) && org.sfLma__Subscriber_Org_ID__c.toLowerCase().includes(this.orgSearchString.toLocaleLowerCase()); 
 
     //include orgs associated with selected packages
-    let passPackageSelectedCheck = false;
-    if (org.sfLma__Package_Version__r !== undefined && org.sfLma__Package_Version__r.sfLma__Package__r !== undefined && org.sfLma__Package_Version__r.sfLma__Package__r.sfLma__Package_ID__c !== undefined) {
-     passPackageSelectedCheck = this.selectedPackages.includes(this.allPackagesOption.value) || this.selectedPackages.includes(this.santizeId15Char(org.sfLma__Package_Version__r.sfLma__Package__r.sfLma__Package_ID__c));
-    }
+    let passPackageSelectedCheck = this.selectedPackages.includes(this.allPackagesOption.value) || this.selectedPackages.includes(this.santizeId15Char(org.sfLma__Package_Version__r.sfLma__Package__r.sfLma__Package_ID__c));
+
     //include already selected orgs
     let orgAlreadySelected = this.selectedOrgs.includes(this.santizeId15Char(org.sfLma__Subscriber_Org_ID__c));
+
     return orgAlreadySelected || (passPackageSelectedCheck && (passSearchCheck || passOrgIDSearchCheck) && passActiveCheck);
   }
 
