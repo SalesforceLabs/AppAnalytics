@@ -16,7 +16,7 @@ public with sharing class appAnalyticsRequestController {
         String [] checkFields = new String [] {'id', 'Name', 'sfLma__Package_ID__c'};
         checkFLSRead(checkFields, sfLMA__Package__c.SObjectType);
 
-        List<sfLMA__Package__c> packages = [select id, Name, sfLma__Package_ID__c from sfLMA__Package__c order by Name];
+        List<sfLMA__Package__c> packages = [select id, Name, sfLma__Package_ID__c from sfLMA__Package__c order by Name limit 1999];
         return packages;
     }
 
@@ -38,7 +38,7 @@ public with sharing class appAnalyticsRequestController {
         checkFields = new String []{'id','sfLma__Package_ID__c'};
         checkFLSRead(checkFields, sfLma__Package__c.SObjectType);
 
-        List<sfLma__License__c> orgs = [SELECT Id, sfLma__Account__r.Name, sfLma__Lead__r.Name, sfLma__Expiration_Date__c, sfLma__Expiration__c, sfLma__Install_Date__c, sfLma__Is_Sandbox__c, sfLma__License_Status__c, sfLma__Status__c, sfLma__Subscriber_Org_ID__c, sfLma__Package_Version__r.sfLma__Package__r.sfLma__Package_ID__c  FROM sfLma__License__c];
+        List<sfLma__License__c> orgs = [SELECT Id, sfLma__Account__r.Name, sfLma__Lead__r.Name, sfLma__Expiration_Date__c, sfLma__Expiration__c, sfLma__Install_Date__c, sfLma__Is_Sandbox__c, sfLma__License_Status__c, sfLma__Status__c, sfLma__Subscriber_Org_ID__c, sfLma__Package_Version__r.sfLma__Package__r.sfLma__Package_ID__c  FROM sfLma__License__c where sfLma__Subscriber_Org_ID__c != Null limit 1999];
         return orgs;
     }
 

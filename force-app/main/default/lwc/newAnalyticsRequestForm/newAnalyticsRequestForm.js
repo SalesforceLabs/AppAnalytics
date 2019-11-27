@@ -35,17 +35,25 @@ export default class NewAnalyticsRequestForm extends LightningElement {
   }) {
     if (data) {
       this.error = undefined;
-
       this.packages.push(this.allPackagesOption);
       this.selectedPackages.push(this.allPackagesOption.value);
       for (let i = 0; i < data.length; i++) {
-        this.packages.push({
-          label: data[i].Name,
-          value: this.santizeId15Char(data[i].sfLma__Package_ID__c)
-        });
+        if (this.isValidId(data[i].sfLma__Package_ID__c,'033')) {
+          this.packages.push({
+            label: data[i].Name,
+            value: this.santizeId15Char(data[i].sfLma__Package_ID__c)
+          });
+        }
+      }
+      
+      if (this.packages.length === 0) {
+        this.packages = [{
+          label: '---No Packages Available---',
+          value: ''
+        }, ];
       }
       window.console.log(this.packages);
-
+      
     } else if (error) {
       this.error = error;
       window.console.log('Error getting packages list');
@@ -65,10 +73,20 @@ export default class NewAnalyticsRequestForm extends LightningElement {
   }) {
     if (data) {
       this.error = undefined;
-      this._rawOrgs = data;
-//      window.console.log(this._rawOrgs);
+     // this._rawOrgs = data;
+     this._rawOrgs = [];
+     for (let i = 0; i < data.length; i++) {
+       let subscriber = this.buildSubscriberRecord(data[i]);
+  //     window.console.log('Org Record: ' + JSON.stringify(subscriber));
+       if (subscriber.isValidRecord) {
+  //       window.console.log('Adding Subscriber');
+        this._rawOrgs.push(subscriber);
+      }
+    }
+  
       this.buildOrgList();
-    } else if (error) {
+    } 
+    else if (error) {
       this.error = error;
       window.console.log('Error getting subscriber orgs');
       window.console.log(error);
@@ -78,73 +96,97 @@ export default class NewAnalyticsRequestForm extends LightningElement {
     }
   }
 
+  buildSubscriberRecord(org) {
+    let subscriber  = {};
+    //valid Record if we have a valid PackageID and a valid OrgID
+  //  window.console.log('Building Subscriber Record: ' + JSON.stringify(org));
+    subscriber.isValidRecord = (this.isValidId(org.sfLma__Subscriber_Org_ID__c,'00D') && org.sfLma__Package_Version__r !== undefined && org.sfLma__Package_Version__r.sfLma__Package__r !== undefined && this.isValidId(org.sfLma__Package_Version__r.sfLma__Package__r.sfLma__Package_ID__c,'033'));
+    if (!subscriber.isValidRecord) {
+      return subscriber;
+    }
+    subscriber.isActive = (org.sfLma__Status__c === 'Active');
+    subscriber.AccountName = (org.sfLma__Account__r) ? org.sfLma__Account__r.Name : '';
+    subscriber.LeadName = (org.sfLma__Lead__r) ? org.sfLma__Lead__r.Name : '';
+    subscriber.OrgName = (subscriber.AccountName !== '') ? subscriber.AccountName : subscriber.LeadName;
+    subscriber.Status = (org.sfLma__Status__c === 'Trial') ? `Trial [${org.sfLma__Expiration__c}]` : org.sfLma__Status__c;
+    subscriber.DisplayName = `${subscriber.OrgName} (${subscriber.Status})`;
+    subscriber.OrgID = this.santizeId15Char(org.sfLma__Subscriber_Org_ID__c);
+    subscriber.PackageID = this.santizeId15Char(org.sfLma__Package_Version__r.sfLma__Package__r.sfLma__Package_ID__c);
+    return subscriber;
+  }
   filterOrgList(org) {
     // include active orgs
-    let passActiveCheck = ((this.activeOrgs !== true) || (org.sfLma__Status__c === 'Active'));
-
+//    window.console.log('Filtering Org: ' + JSON.stringify(org));
+   let passActiveCheck = ((this.activeOrgs !== true) || org.isActive === true);
+//    window.console.log('Active Check: ' + passActiveCheck);
     // Seach based on Account or Lead Name
-    let passSearchCheck = (this.orgSearchString.length === 0) || ((org.sfLma__Account__r) && org.sfLma__Account__r.Name.toLowerCase().includes(this.orgSearchString.toLowerCase())) || ((org.sfLma__Lead__r) && org.sfLma__Lead__r.Name.toLowerCase().includes(this.orgSearchString.toLowerCase()));
+    let passSearchCheck = (this.orgSearchString.length === 0) || (org.AccountName.toLowerCase().includes(this.orgSearchString.toLowerCase())) || (org.LeadName.toLowerCase().includes(this.orgSearchString.toLowerCase()));
+//    window.console.log('Search Check: ' + passSearchCheck);
 // if search string is 15 or 18 characters, filter based on OrgID
-    let passOrgIDSearchCheck =  (this.orgSearchString.length === 15 || this.orgSearchString.length === 18) && org.sfLma__Subscriber_Org_ID__c.toLowerCase().includes(this.orgSearchString.toLocaleLowerCase()); 
+    let passOrgIDSearchCheck =  ((this.orgSearchString.length === 15 || this.orgSearchString.length === 18) && org.OrgID === this.santizeId15Char(this.orgSearchString)); 
+//    window.console.log('ID Search Check: ' + passOrgIDSearchCheck);
 
     //include orgs associated with selected packages
-    let passPackageSelectedCheck = false;
-    if (org.sfLma__Package_Version__r !== undefined && org.sfLma__Package_Version__r.sfLma__Package__r !== undefined && org.sfLma__Package_Version__r.sfLma__Package__r.sfLma__Package_ID__c !== undefined) {
-     passPackageSelectedCheck = this.selectedPackages.includes(this.allPackagesOption.value) || this.selectedPackages.includes(this.santizeId15Char(org.sfLma__Package_Version__r.sfLma__Package__r.sfLma__Package_ID__c));
-    }
+    let passPackageSelectedCheck = (this.selectedPackages.includes(this.allPackagesOption.value) || this.selectedPackages.includes(org.PackageID));
+  //  window.console.log('Package Selected Check: ' + passPackageSelectedCheck);
     //include already selected orgs
-    let orgAlreadySelected = this.selectedOrgs.includes(this.santizeId15Char(org.sfLma__Subscriber_Org_ID__c));
-    return orgAlreadySelected || (passPackageSelectedCheck && (passSearchCheck || passOrgIDSearchCheck) && passActiveCheck);
+    let orgAlreadySelected = this.selectedOrgs.includes(org.OrgID);
+  //  window.console.log('Org Already Selected:' + orgAlreadySelected);
+
+    return  (orgAlreadySelected || (passPackageSelectedCheck && (passSearchCheck || passOrgIDSearchCheck) && passActiveCheck));
   }
 
-
   buildOrgList() {
-    this.orgs = [];
+    //this.orgs = [];
+    this.orgs = undefined;
     let orgDedupe = [];
-    let filteredOrgs = this._rawOrgs.filter(this.filterOrgList.bind(this));
+    
+    let filteredOrgs = this._rawOrgs && Array.isArray(this._rawOrgs) ? this._rawOrgs.filter(this.filterOrgList.bind(this)) : [];
 
-    if (filteredOrgs.length == 0) {
+    if (filteredOrgs.length === 0) {
       this.orgs = [{
         label: '---No Subscriber Orgs Available---',
         value: ''
       }, ];
     } else {
-      this.orgs.push(this.allOrgsOption);
+      let tmpOrgs = []; 
+      tmpOrgs.push(this.allOrgsOption);
       for (let i = 0; i < filteredOrgs.length; i++) {
-        if (!orgDedupe.includes(filteredOrgs[i].sfLma__Subscriber_Org_ID__c)) {
-          let orgName = '';
-          if (filteredOrgs[i].sfLma__Account__r) {
-            orgName = filteredOrgs[i].sfLma__Account__r.Name;
-          } else if ((filteredOrgs[i].sfLma__Lead__r)) {
-            orgName = filteredOrgs[i].sfLma__Lead__r.Name;
-          } else {
-            orgName = filteredOrgs[i].sfLma__Subscriber_Org_ID__c;
+        if (!orgDedupe.includes(filteredOrgs[i].OrgID)) {
+          tmpOrgs.push({
+              label: filteredOrgs[i].DisplayName,
+              value: filteredOrgs[i].OrgID
+            });
+          orgDedupe.push(filteredOrgs[i].OrgID);
           }
-          let orgStatus = filteredOrgs[i].sfLma__Status__c;
-          if (orgStatus === 'Trial') {
-            orgStatus = orgStatus + '[' + filteredOrgs[i].sfLma__Expiration__c + ']';
-          }
-
-          let orgLabel = orgName  + ' (' + orgStatus + ')';
-          if (filteredOrgs[i].sfLma__Is_Sandbox__c === 'true') {
-            orgLabel = orgLabel + '--SB';
-          }
-          this.orgs.push({
-            label: orgLabel,
-            value: this.santizeId15Char(filteredOrgs[i].sfLma__Subscriber_Org_ID__c)
-          });
-          orgDedupe.push(filteredOrgs[i].sfLma__Subscriber_Org_ID__c);
         }
+      this.orgs = tmpOrgs;
       }
-    }
+    
     if (this.selectedOrgs.length === 0) {
       this.selectedOrgs.push(this.allOrgsOption.value);
     }
+    
+  }
+
+ 
+  isValidId(idToValidate,idPrefix) {
+    window.console.log(`Checking to see if ${idToValidate} is valid. Prefix ${idPrefix}`);
+    let re = new RegExp(idPrefix + '([a-zA-Z0-9]{12}|[a-zA-Z0-9]{15})');
+   // 033([a-zA-Z0-9]{12}|[a-zA-Z0-9]{15})
+   let isValidId = re.test(idToValidate);
+   window.console.log('Is it valid?' + isValidId);
+    return isValidId;
   }
 
   santizeId15Char(idToSanitize) {
-    //Bit of a cludge -- enforce that ID always has 15 characters without enforcing that it's a valid ID
-    return idToSanitize.padEnd(15, '0').substr(0, 15);
+  //  window.console.log(`SantizingID:  ${idToSanitize}. Prefix ${idPrefix}`)
+   // let santizedId = this.isValidId(idToSanitize,idPrefix) ? idToSanitize.substr(0, 15) : null;
+   let santizedId = idToSanitize.substr(0, 15);
+   // window.console.log('Santized ID: ' + santizedId);
+    return santizedId;
+    
+    //idToSanitize.padEnd(15, '0').substr(0, 15);
 
   }
 

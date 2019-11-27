@@ -24,13 +24,13 @@ export default class AppAnalyticsRequestPageWrapper extends LightningElement {
 
   handleRefreshClick() {
     window.console.log('Refreshing Requests List');
-    fireEvent(this.pageRef, 'refreshList','');
+    fireEvent(this.pageRef, 'refreshlist','');
   }
 
   handleSubmitSuccess() {
     window.console.log('handle form success');
     this.showNewForm = false;
-    fireEvent(this.pageRef, 'refreshList','');
+    fireEvent(this.pageRef, 'refreshlist','');
   }
 
   handleSubmitCancel() {

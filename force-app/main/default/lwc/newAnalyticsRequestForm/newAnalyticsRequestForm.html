@@ -1,6 +1,6 @@
 <template>
   <lightning-card>
-      
+
       <div class="slds-grid">
         <div class="slds-col slds-size_1-of-2 slds-p-horizontal_medium">
           <lightning-radio-group required label="Data Type" options={dataTypeOptions} value={dataType} type="radio"
@@ -29,38 +29,15 @@
                   options={orgs} max="16" onchange={handleOrgIdChange} disable-reordering value={selectedOrgs}></lightning-dual-listbox>
                   <lightning-helptext content="Enter at least one package ID or one org ID, you can’t leave both fields blank, maximum of up to 16 orgs. If left blank it will choose all subscribers."></lightning-helptext>
             </template>
+            <template if:false={orgs}>
+              Loading Subscriber list ...
+              <lightning-spinner
+                    alternative-text="Loading...">
+                </lightning-spinner>
+            
+          </template>
         </div>
     </div>
-    <!--
-    <div class="slds-m-around_medium">
-      <template if:true={error}>
-        {error}
-      </template>
-
-      <lightning-radio-group required label="Data Type" options={dataTypeOptions} value={dataType} type="radio"
-        onchange={handleDataTypeChange}></lightning-radio-group>
-      <lightning-input type="datetime" label="Request Start" onchange={handleStartTimeChange} required>
-      </lightning-input>
-      <lightning-input type="datetime" label="Request End" onchange={handleEndTimeChange}></lightning-input>
-      <template if:true={packages}>
-        <lightning-dual-listbox label="Package IDs" source-label="Available" selected-label="Selected"
-          options={packages} onchange={handlePackageIdChange} max="16" disable-reordering></lightning-dual-listbox>
-      </template>
-      <lightning-input type="checkbox" label="Limit orgs to Subscribers of Selected Packages"
-        onchange={handleOrgDependentChange} value={orgdependent}></lightning-input>
-      <lightning-input type="checkbox" label="Limit orgs to Active Subscribers" onchange={handleOrgActiveChange}
-        value={activeorgs}></lightning-input>
-      <lightning-input type="search" value={orgSearchString} label="Search Subscriber Orgs" onchange={handleOrgSearch}>
-      </lightning-input>
-      <template if:true={orgs}>
-        <lightning-dual-listbox label="Organization IDs" source-label="Available" selected-label="Selected"
-          options={orgs} max="16" onchange={handleOrgIdChange} disable-reordering></lightning-dual-listbox>
-      </template>
-
-      <lightning-button variant="Neutral" label="Cancel" onclick={handleCancel}></lightning-button>
-      <lightning-button variant="brand" label="Submit" onclick={handleSubmit}></lightning-button>
-    </div>
-  -->
   <lightning-button variant="Neutral" label="Cancel" onclick={handleCancel} slot="footer" class="slds-m-around_small"></lightning-button>
   <lightning-button variant="brand" label="Submit" onclick={handleSubmit} slot="footer" class="slds-m-around_small"></lightning-button>
   </lightning-card>

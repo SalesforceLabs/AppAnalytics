@@ -246,7 +246,7 @@ export default class AppAnalyticsRequestList extends LightningElement {
 
   connectedCallback() {
     // subscribe to refreshList event
-    registerListener('refreshList', this.handleRefreshList, this);
+    registerListener('refreshlist', this.handleRefreshList, this);
   }
   disconnectedCallback() {
     unregisterAllListeners(this);
