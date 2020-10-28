@@ -1,0 +1,34 @@
+[
+    {
+        "sobject": "Account",
+        "saveRefs": true,
+        "resolveRefs": false,
+        "files": [
+            "Account.json"
+        ]
+    },
+    {
+        "sobject": "sfLma__Package__c",
+        "saveRefs": true,
+        "resolveRefs": false,
+        "files": [
+            "sfLma__Package__c.json"
+        ]
+    },
+    {
+        "sobject": "sfLma__Package_Version__c",
+        "saveRefs": true,
+        "resolveRefs": true,
+        "files": [
+            "sfLma__Package_Version__c.json"
+        ]
+    },
+   {
+        "sobject": "sfLma__License__c",
+        "saveRefs": false,
+        "resolveRefs": true,
+        "files": [
+            "sfLma__License__c.json"
+        ]
+    }
+]

@@ -1,0 +1,31 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "sfLma__Package_Version__c",
+                "referenceId": "sfLma__Package_Version__cRef1"
+            },
+            "Name": "Large Version 1",
+            "sfLma__Version_ID__c": "04txx00000000LG",
+            "sfLma__Package__c":"@sfLma__Package__cRef3"
+        },
+        {
+            "attributes": {
+                "type": "sfLma__Package_Version__c",
+                "referenceId": "sfLma__Package_Version__cRef2"
+            },
+            "Name": "Empty Version 1",
+            "sfLma__Version_ID__c": "04txx00000000ND",
+            "sfLma__Package__c":"@sfLma__Package__cRef1"
+        },
+        {
+            "attributes": {
+                "type": "sfLma__Package_Version__c",
+                "referenceId": "sfLma__Package_Version__cRef3"
+            },
+            "Name": "Small Version 1",
+            "sfLma__Version_ID__c": "04txx00000000SM",
+            "sfLma__Package__c":"@sfLma__Package__cRef2"
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "sfLma__License__c",
+                "referenceId": "sfLma__License__cRef1"
+            },
+            "sfLma__Status__c": "Active",
+            "sfLma__Account__c": "@AccountRef1",
+            "sfLma__Subscriber_Org_ID__c": "00Dxx00SIM00foo",
+            "sfLma__Package_Version__c":"@sfLma__Package_Version__cRef1"
+        },
+        {
+            "attributes": {
+                "type": "sfLma__License__c",
+                "referenceId": "sfLma__License__cRef2"
+            },
+            "sfLma__Status__c": "Trial",
+            "sfLma__Account__c": "@AccountRef2",
+            "sfLma__Subscriber_Org_ID__c": "00Dxx00SIM00bar",
+            "sfLma__Package_Version__c":"@sfLma__Package_Version__cRef1"
+        },
+        {
+            "attributes": {
+                "type": "sfLma__License__c",
+                "referenceId": "sfLma__License__cRef3"
+            },
+            "sfLma__Status__c": "Trial",
+            "sfLma__Account__c": "@AccountRef1",
+            "sfLma__Subscriber_Org_ID__c": "00Dxx00SIM00foo",
+            "sfLma__Package_Version__c":"@sfLma__Package_Version__cRef3"
+        },
+        {
+            "attributes": {
+                "type": "sfLma__License__c",
+                "referenceId": "sfLma__License__cRef4"
+            },
+            "sfLma__Status__c": "Active",
+            "sfLma__Account__c": "@AccountRef2",
+            "sfLma__Subscriber_Org_ID__c": "00Dxx00SIM00bar",
+            "sfLma__Package_Version__c":"@sfLma__Package_Version__cRef3"
+        }
+    ]
+}

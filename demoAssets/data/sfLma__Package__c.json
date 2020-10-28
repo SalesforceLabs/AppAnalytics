@@ -1,0 +1,28 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "sfLma__Package__c",
+                "referenceId": "sfLma__Package__cRef1"
+            },
+            "Name": "AA Empty Sample Package",
+            "sfLma__Package_ID__c": "033xx00SIMempty"
+        },
+        {
+            "attributes": {
+                "type": "sfLma__Package__c",
+                "referenceId": "sfLma__Package__cRef2"
+            },
+            "Name": "AA Small Sample Package",
+            "sfLma__Package_ID__c": "033xx00SIMsmall"
+        },
+        {
+            "attributes": {
+                "type": "sfLma__Package__c",
+                "referenceId": "sfLma__Package__cRef3"
+            },
+            "Name": "AA Large Sample Package",
+            "sfLma__Package_ID__c": "033xx00SIMlarge"
+        }
+    ]
+}

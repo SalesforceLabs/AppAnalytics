@@ -1,10 +1,13 @@
 {
-  "orgName": "jhaydraude Company",
+  "orgName": "Salesforce Labs JHD",
   "edition": "Developer",
   "features": [],
   "settings": {
-    "orgPreferenceSettings": {
-      "s1DesktopEnabled": true
+    "lightningExperienceSettings": {
+        "enableS1DesktopEnabled": true
+    },
+    "appAnalyticsSettings": {
+      "enableSimulationMode": true
     }
   }
 }
