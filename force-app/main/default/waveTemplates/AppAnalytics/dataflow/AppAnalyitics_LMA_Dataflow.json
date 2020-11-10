@@ -1,0 +1,240 @@
+{
+  "isDeletable": true,
+  "longRunningAlertInMins": "",
+  "notificationLevel": "",
+  "workflowDefinition": {
+    "augment_sfLma__License__c_Account": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "sfdcDigest_sfLma__License__c",
+        "left_key": ["sfLma__Account__c"],
+        "right_select": ["Name"],
+        "right": "sfdcDigest_Account",
+        "relationship": "sfLma__Account__c"
+      }
+    },
+    "register_LMA Data": {
+      "action": "sfdcRegister",
+      "parameters": {
+        "name": "LMA Data",
+        "alias": "${App.Datasets.LMA_Data_tp.FullyQualifiedName}",
+        "source": "augment_RecordType"
+      }
+    },
+    "sfdcDigest_Account": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Name"},
+          {"name": "Id"}
+        ],
+        "object": "Account"
+      }
+    },
+    "sfdcDigest_Lead": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Company"},
+          {"name": "Name"},
+          {"name": "Id"}
+        ],
+        "object": "Lead"
+      }
+    },
+    "sfdcDigest_RecordType": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "DeveloperName"},
+          {"name": "Id"}
+        ],
+        "object": "RecordType"
+      }
+    },
+    "sfdcDigest_sfLma__License__c": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "IsDeleted"},
+          {"name": "sfLma__Expiration__c"},
+          {"name": "sfLma__Expiration_Date__c"},
+          {"name": "sfLma__Help__c"},
+          {"name": "sfLma__Install_Date__c"},
+          {"name": "sfLma__Instance__c"},
+          {"name": "Name"},
+          {"name": "sfLma__License_Status__c"},
+          {"name": "sfLma__License_Type__c"},
+          {"name": "sfLma__Licensed_Seats__c"},
+          {"name": "sfLma__Org_Edition__c"},
+          {"name": "sfLma__Trial_Expiration_Date__c"},
+          {"name": "sfLma__Org_Instance__c"},
+          {"name": "sfLma__Org_Status__c"},
+          {"name": "sfLma__Org_Status_Formula__c"},
+          {"name": "sfLma__Org_Trial_Expiration__c"},
+          {"name": "sfLma__Org_Type__c"},
+          {"name": "sfLma__Package_License_ID__c"},
+          {"name": "sfLma__Package_Version_Number__c"},
+          {"name": "sfLma__Proxy_User__c"},
+          {"name": "Id"},
+          {"name": "sfLma__Is_Sandbox__c"},
+          {"name": "sfLma__Seats__c"},
+          {"name": "sfLma__Status__c"},
+          {"name": "sfLma__Subscriber_Org_ID__c"},
+          {"name": "sfLma__Subscriber_Org_Is_Sandbox__c"},
+          {"name": "sfLma__Used_Licenses__c"},
+          {"name": "sfLma__Version_Number__c"},
+          {"name": "sfLma__Account__c"},
+          {"name": "sfLma__Contact__c"},
+          {"name": "sfLma__Lead__c"},
+          {"name": "sfLma__Package__c"},
+          {"name": "sfLma__Package_Version__c"},
+          {"name": "RecordTypeId"}
+        ],
+        "object": "sfLma__License__c"
+      }
+    },
+    "sfdcDigest_sfLma__Package_Version__c": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "sfLma__Is_Beta__c"},
+          {"name": "sfLma__Help__c"},
+          {"name": "Name"},
+          {"name": "sfLma__Release_Date__c"},
+          {"name": "sfLma__Sequence__c"},
+          {"name": "sfLma__Version__c"},
+          {"name": "sfLma__Version_ID__c"},
+          {"name": "sfLma__Version_Number__c"},
+          {"name": "Id"}
+        ],
+        "object": "sfLma__Package_Version__c"
+      }
+    },
+    "augment_sfLma__Package_Version__c": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "augment_sfLma__Package__c",
+        "left_key": ["sfLma__Package_Version__c"],
+        "right_select": [
+          "sfLma__Is_Beta__c",
+          "sfLma__Help__c",
+          "Name",
+          "sfLma__Release_Date__c",
+          "sfLma__Sequence__c",
+          "sfLma__Version__c",
+          "sfLma__Version_ID__c",
+          "sfLma__Version_Number__c"
+        ],
+        "right": "sfdcDigest_sfLma__Package_Version__c",
+        "relationship": "sfLma__Package_Version__c"
+      }
+    },
+    "augment_Lead": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "augment_Account",
+        "left_key": ["sfLma__Lead__c"],
+        "right_select": [
+          "Company",
+          "Name"
+        ],
+        "right": "sfdcDigest_Lead",
+        "relationship": "sfLma__Lead__c"
+      }
+    },
+    "sfdcDigest_Contact": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "Name"},
+          {"name": "AccountId"},
+          {"name": "Id"}
+        ],
+        "object": "Contact"
+      }
+    },
+    "augment_Contact": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "augment_sfLma__License__c_Account",
+        "left_key": ["sfLma__Contact__c"],
+        "right_select": [
+          "Name",
+          "AccountId"
+        ],
+        "right": "sfdcDigest_Contact",
+        "relationship": "sfLma__Contact__c"
+      }
+    },
+    "augment_RecordType": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "augment_sfLma__Package_Version__c",
+        "left_key": ["RecordTypeId"],
+        "right_select": ["DeveloperName"],
+        "right": "sfdcDigest_RecordType",
+        "relationship": "RecordTypeId"
+      }
+    },
+    "sfdcDigest_sfLma__Package__c": {
+      "action": "sfdcDigest",
+      "parameters": {
+        "fields": [
+          {"name": "sfLma__Developer_Name__c"},
+          {"name": "sfLma__Developer_Org_ID__c"},
+          {"name": "sfLma__Help__c"},
+          {"name": "sfLma__Latest_Version__c"},
+          {"name": "sfLma__Package_ID__c"},
+          {"name": "Name"},
+          {"name": "sfLma__Release_Date__c"},
+          {"name": "Id"}
+        ],
+        "object": "sfLma__Package__c"
+      }
+    },
+    "augment_Account": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "augment_Contact",
+        "left_key": ["sfLma__Contact__c.AccountId"],
+        "right_select": ["Name"],
+        "right": "sfdcDigest_Account",
+        "relationship": "sfLma__Contact__c.AccountId"
+      }
+    },
+    "augment_sfLma__Package__c": {
+      "action": "augment",
+      "parameters": {
+        "right_key": ["Id"],
+        "left": "augment_Lead",
+        "left_key": ["sfLma__Package__c"],
+        "right_select": [
+          "sfLma__Developer_Name__c",
+          "sfLma__Developer_Org_ID__c",
+          "sfLma__Help__c",
+          "sfLma__Latest_Version__c",
+          "sfLma__Package_ID__c",
+          "Name",
+          "sfLma__Release_Date__c"
+        ],
+        "right": "sfdcDigest_sfLma__Package__c",
+        "relationship": "sfLma__Package__c"
+      }
+    }
+  },
+  "DataflowType": "USER",
+  "_type": "dataflow",
+  "name": "AppAnalyitics_LMA_Dataflow",
+  "MasterLabel": "AppAnalyitics LMA Dataflow",
+  "_url": "/insights/internal_api/v1.0/esObject/workflow//json",
+  "_uid": "",
+  "nextRun": "",
+  "WorkflowStatus": "Inactive"
+}

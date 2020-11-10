@@ -1,0 +1,11 @@
+"date","organization_id","organization_name","organization_status","organization_edition","package_id","package_version_id","managed_package_namespace","custom_entity","count"
+2020-10-23,00Dxx00SIM00foo,kankanti,DEMO,Enterprise Edition,033xx00SIMsmall,04txx00SIM00001,foo_inc,Foo,1
+2020-10-23,00Dxx00SIM00bar,kankanti,DEMO,Enterprise Edition,033xx00SIMsmall,04txx00SIM00001,foo_inc,Foo,1
+2020-10-24,00Dxx00SIM00foo,kankanti,DEMO,Enterprise Edition,033xx00SIMsmall,04txx00SIM00001,foo_inc,Foo,1
+2020-10-24,00Dxx00SIM00bar,kankanti,DEMO,Enterprise Edition,033xx00SIMsmall,04txx00SIM00001,foo_inc,Foo,1
+2020-10-25,00Dxx00SIM00foo,kankanti,DEMO,Enterprise Edition,033xx00SIMsmall,04txx00SIM00001,foo_inc,Foo,1
+2020-10-25,00Dxx00SIM00bar,kankanti,DEMO,Enterprise Edition,033xx00SIMsmall,04txx00SIM00001,foo_inc,Foo,1
+2020-10-26,00Dxx00SIM00foo,kankanti,DEMO,Enterprise Edition,033xx00SIMsmall,04txx00SIM00001,foo_inc,Foo,1
+2020-10-26,00Dxx00SIM00bar,kankanti,DEMO,Enterprise Edition,033xx00SIMsmall,04txx00SIM00001,foo_inc,Foo,1
+2020-10-27,00Dxx00SIM00foo,kankanti,DEMO,Enterprise Edition,033xx00SIMsmall,04txx00SIM00001,foo_inc,Foo,1
+2020-10-27,00Dxx00SIM00bar,kankanti,DEMO,Enterprise Edition,033xx00SIMsmall,04txx00SIM00001,foo_inc,Foo,1

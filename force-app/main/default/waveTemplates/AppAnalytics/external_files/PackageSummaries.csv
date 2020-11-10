@@ -1,0 +1,3 @@
+"month","organization_id","package_id","managed_package_namespace","custom_entity","custom_entity_type","user_id_token","user_type","num_creates","num_reads","num_updates","num_deletes","num_views"
+2020-09,00Dxx00SIM00foo,033xx00SIMsmall,devorg,Sample_Object,CustomObject,005-vdJe+I8y19tezmZFYkmztq9xW2iycbU2QjV7aIK7XSQ=,Standard,0,1,0,0,
+2020-09,00Dxx00SIM00bar,033xx00SIMsmall,devorg,Sample_Object,CustomObject,005-vdJe+I8y19tezmZFYkmztq9xW2iycbU2QjV7aIK7XSQ=,Standard,0,1,0,0,

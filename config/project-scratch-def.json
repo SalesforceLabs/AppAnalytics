@@ -1,7 +1,7 @@
 {
   "orgName": "Salesforce Labs JHD",
   "edition": "Developer",
-  "features": [],
+  "features": ["DevelopmentWave","WavePlatform"],
   "settings": {
     "lightningExperienceSettings": {
         "enableS1DesktopEnabled": true

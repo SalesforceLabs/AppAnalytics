@@ -1,0 +1,113 @@
+{
+  "templateType" : "app",
+  "label" : "AppAnalytics",
+  "name" : "AppAnalytics",
+  "description" : "",
+  "assetVersion" : 50.0,
+  "variableDefinition" : "variables.json",
+  "uiDefinition" : "ui.json",
+  "rules" : [
+    {
+      "type" : "templateToApp",
+      "file" : "template-to-app-rules.json"
+    },
+    {
+      "type" : "appToTemplate",
+      "file" : "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo" : {
+    "templateVersion" : "1.0",
+    "notesFile" : "releaseNotes.html"
+  },
+  "folderDefinition" : "folder.json",
+  "externalFiles" : [
+    {
+      "label" : "PackageLogs",
+      "name" : "PackageLogs",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/PackageLogs.csv",
+      "type" : "CSV",
+      "schema" : "external_files/PackageLogs.json",
+      "userXmd" : "external_files/PackageLogs_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "PackageSummaries",
+      "name" : "PackageSummaries",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/PackageSummaries.csv",
+      "type" : "CSV",
+      "schema" : "external_files/PackageSummaries.json",
+      "userXmd" : "external_files/PackageSummaries_XMD.json",
+      "rows" : 5
+    },
+    {
+      "label" : "SubscriberSnapshots",
+      "name" : "SubscriberSnapshots",
+      "condition" : "${Variables.Overrides.createAllExternalFiles}",
+      "file" : "external_files/SubscriberSnapshots.csv",
+      "type" : "CSV",
+      "schema" : "external_files/SubscriberSnapshots.json",
+      "userXmd" : "external_files/SubscriberSnapshots_XMD.json",
+      "rows" : 5
+    }
+  ],
+  "lenses" : [ ],
+  "dashboards" : [
+    {
+      "label" : "Partner Intelligence Dashboard",
+      "name" : "Partner_Intelligence_Dashboard_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/Partner_Intelligence_Dashboard.json"
+    }
+  ],
+  "eltDataflows" : [
+    {
+      "label" : "AppAnalyitics LMA Dataflow",
+      "name" : "AppAnalyitics_LMA_Dataflow",
+      "condition" : "${Variables.Overrides.createDataflow}",
+      "file" : "dataflow/AppAnalyitics_LMA_Dataflow.json"
+    }
+  ],
+  "recipes" : [ ],
+  "datasetFiles" : [
+    {
+      "label" : "LMA Data",
+      "name" : "LMA_Data_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd" : "dataset_files/LMA_Data_XMD.json"
+    },
+    {
+      "label" : "Package Logs with LMA Data",
+      "name" : "Package_Logs_with_LMA_Data_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd" : "dataset_files/Package_Logs_with_LMA_Data_XMD.json"
+    },
+    {
+      "label" : "Package Summaries with LMA Data",
+      "name" : "Package_Summaries_with_LMA_Data_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd" : "dataset_files/Package_Summaries_with_LMA_Data_XMD.json"
+    },
+    {
+      "label" : "Subscriber Snapshots with LMA Data",
+      "name" : "Subscriber_Snapshots_with_LMA_Data_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd" : "dataset_files/Subscriber_Snapshots_with_LMA_Data_XMD.json"
+    }
+  ],
+  "storedQueries" : [ ],
+  "imageFiles" : [ ],
+  "extendedTypes" : { },
+  "templateDependencies" : [ ],
+  "icons" : {
+    "appBadge" : {
+      "name" : "16.png"
+    },
+    "templateBadge" : {
+      "name" : "default.png"
+    },
+    "templatePreviews" : [ ]
+  }
+}
