@@ -191,14 +191,19 @@ export default class NewAnalyticsRequestForm extends LightningElement {
   }
 
   get dataTypeOptions() {
-    return [{
-        label: 'Custom Object Usage Summary',
+    return [
+      {
+        label: 'Package Usage Log',
+        value: 'CustomObjectUsageLog'
+      },
+      {
+        label: 'Package Usage Summary',
         value: 'CustomObjectUsageSummary'
       },
       {
-        label: 'Custom Object Usage Log',
-        value: 'CustomObjectUsageLog'
-      },
+        label: 'Subscriber Snapshot',
+        value: 'SubscriberSnapshot'
+      }
     ];
   }
 
@@ -206,9 +211,10 @@ export default class NewAnalyticsRequestForm extends LightningElement {
     // If we have an endTime set, then the latest possible startTime is the endTime
     // If endTime is not set, then the latest possible startTime is right now.
     let startMax = new Date();
-    if (this.endTime) {
-      startMax = new Date(this.endTime);
-    }
+  //Get rid of the 7 day limit for now
+  //  if (this.endTime) {
+  //    startMax = new Date(this.endTime);
+  //  }
     return startMax;
   }
 
@@ -218,7 +224,7 @@ export default class NewAnalyticsRequestForm extends LightningElement {
     let startMin = '';
     if (this.endTime) {
       startMin = new Date(this.endTime);
-      startMin.setDate(startMin.getDate() - 7);
+    //  startMin.setDate(startMin.getDate() - 7); //Get rid of 7 day limit for now
     }
     return startMin;
   }
@@ -226,13 +232,13 @@ export default class NewAnalyticsRequestForm extends LightningElement {
   get endTimeMax() {
     //End Time Max is the lesser of startTime + 7 days and now.
     let endMax = new Date();
-    if (this.startTime) {
-      let startTime = new Date(this.startTime);
-      endMax.setDate(startTime.getDate() + 7);
-      if (endMax.valueOf() > Date.now())  {
-        endMax = new Date();
-      }
-    }
+   // if (this.startTime) {
+   //   let startTime = new Date(this.startTime);
+   //   endMax.setDate(startTime.getDate() + 7);
+   //   if (endMax.valueOf() > Date.now())  {
+   //     endMax = new Date();
+   //   }
+   // }
     return endMax;
   }
 
