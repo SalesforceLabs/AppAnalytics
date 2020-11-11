@@ -6,9 +6,9 @@
           <lightning-radio-group required label="Data Type" options={dataTypeOptions} value={dataType} type="radio"
             onchange={handleDataTypeChange}></lightning-radio-group>
             <lightning-helptext content="The CustomObjectUsageLog provides details about your Custom Object Usage. CustomObjectUsageSummary provides you with a high level metrics per calebdar month."></lightning-helptext>
-          <lightning-input type="datetime" label="Request Start" onchange={handleStartTimeChange} required max={startTimeMax} min={startTimeMin}>
+          <lightning-input type="datetime" label="Request Start" onchange={handleStartTimeChange} required >
           </lightning-input>
-          <lightning-input type="datetime" label="Request End" onchange={handleEndTimeChange} max={endTimeMax} min={endTimeMin}></lightning-input>
+          <lightning-input type="datetime" label="Request End" onchange={handleEndTimeChange} ></lightning-input>
             <lightning-helptext content="Start Date and End Date for when you like data from. They have to be within a range of 7 days"></lightning-helptext>
           <template if:true={packages}>
               <lightning-dual-listbox label="Packages" source-label="Available" selected-label="Selected"
